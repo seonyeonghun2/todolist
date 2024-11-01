@@ -1,0 +1,12 @@
+@charset "utf-8";
+
+.d-flex {
+    display: flex
+}
+.gap-1 {
+    gap: 1rem
+}
+#todos {
+    margin: 0;
+    padding: 0
+}
