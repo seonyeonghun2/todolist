@@ -6,6 +6,9 @@
 .gap-1 {
     gap: 1rem
 }
+.items-center {
+    align-items: center
+}
 #todos {
     margin: 0;
     padding: 0

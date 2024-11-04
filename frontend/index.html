@@ -4,7 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todos App</title>
+    <!-- mvp css -->
+    <link rel="stylesheet" href="https://unpkg.com/mvp.css"> 
     <link rel="stylesheet" href="style.css">
+    <!-- jQuery CDN : Content Delivery Network -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
     <script src="main.js"></script>
 </head>
 <body>
@@ -13,17 +17,12 @@
         <p>Total : 3</p>
         <p>2024.11.01</p>
     </div>
-    <form id="todos-form">
+    <form id="todos-form" class="d-flex items-center gap-1">
         <input type="text">
         <input type="submit" value="+">
     </form>
     <ul id="todos">
-        <li class="d-flex gap-1">
-            <input type="checkbox">
-            <p>lorem ipsum dolor sit amet</p>
-            <input type="button" value="modify">
-            <input type="button" value="remove">
-        </li>
+        <p>loading....</p>
     </ul>
 </body>
 </html>
