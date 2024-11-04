@@ -1,27 +1,32 @@
 const express = require("express");
 const app = express();
 const port = process.env.PORT || 3000;
+const cors = require("cors");
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}))
+app.use(cors());
 
 let todos = [
   {
     "userId": 1,
     "id": 1,
     "title": "delectus aut autem",
+    "date": "2024-11-01",
     "completed": false
   },
   {
     "userId": 1,
     "id": 2,
     "title": "lorem ipsum dolor",
+    "date": "2024-11-03",
     "completed": false
   },
   {
     "userId": 1,
     "id": 3,
     "title": "the perfect espresso",
+    "date": "2024-11-04",
     "completed": true
   },
 ];
