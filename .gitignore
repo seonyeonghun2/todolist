@@ -7,3 +7,7 @@ node_modules/
 *.pdf
 *.7z
 *.doc
+*.env
+*.env.local
+*.env.development
+*.env.production
