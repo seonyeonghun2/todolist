@@ -17,6 +17,9 @@ const getAllTodos = async (req, res) => {
 const addTodo = async (req, res) => {
     const { title, completed } = req.body;
     try {
+      if (!title) {
+        throw new Error("내용이 없습니다");
+      }
       const todo = await Todo.create({
         title,
         completed
@@ -24,7 +27,7 @@ const addTodo = async (req, res) => {
     } catch (error) {
       console.log("addTodo is Fail : ", error)
     } 
-    res.status(200).send("add Todo");
+    res.status(200).send("todo가 추가되었습니다.");
   }
 const getTodo = async (req, res) => {
     const id = req.params.id; // _id 값을 대신하는 
