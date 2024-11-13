@@ -4,8 +4,14 @@ $(function () {
 });
 function createTodo(){
   // + : 등록 버튼 누를때,
-  const todosForm = document.querySelector("#todos-form");
-  todosForm.addEventListener("submit", function(){  
+  const todosForm = $("#todos-form");
+  const todoText = $("#todo-text");
+  todosForm.on("submit", function(e){  
+    e.preventDefault(); // 화면 새로고침 금지
+    if (todoText.val() == "") {
+      alert("할일 항목이 비어있습니다.");  
+      return;    
+    }
     $.ajax({
       url: "http://localhost:3000/todos",
       method: "post",
@@ -13,11 +19,10 @@ function createTodo(){
         "Content-Type": "application/json"
       },
       data: JSON.stringify({
-        title: todosForm.querySelector("#todo-text").value,
+        title: $("#todo-text").val(),
         completed: false
       }),
       success: async function(result) {
-        console.log(result);
         await fetchTodos();        
         clearInputAndFocus()
       }
@@ -26,8 +31,8 @@ function createTodo(){
   // 입력값이 있는지 확인 ==> 없다면 경고! 작성요청, 있다면 서버에 등록요청
 }
 function clearInputAndFocus(){
-  todosForm.querySelector("#todo-text").value = ""; // 입력막대 초기화
-  todosForm.querySelector("#todo-text").focus(); // 입력막대 포커스 적용
+  $("#todo-text").val("") // 입력막대 초기화
+  $("#todo-text").focus(); // 입력막대 포커스 적용
 }
 async function fetchTodos () {
   $.ajax({
@@ -46,8 +51,22 @@ async function fetchTodos () {
       });
       todoUL.html(str);
       removeTodo();
+      callModal();
     },
   });
+}
+function callModal(){
+  const editTodo = $(".modify-btn");
+  editTodo.on("click", function(){
+    const edit = $(this);
+    const todoId = edit.parent().attr("data-id"); // 수정버튼의 부모 li의 data-id 값
+    const todoTitle = edit.siblings("p").text(); // 수정버튼의 형제 p의 내용 텍스트
+    // console.log(todoId, todoTitle);
+    const modal = $("#modal");
+    modal.find("#prev-todo").val(todoTitle); // 수정버튼 누를때 항목 타이틀을 기존 항목에 저장
+    modal.attr("class", ""); // modal 요소의 class 속성을 빈값
+    modal.find("#next-todo").focus(); // 포커스 적용
+  })
 }
 
 function removeTodo() {

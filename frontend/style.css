@@ -13,3 +13,51 @@
     margin: 0;
     padding: 0
 }
+#todos-form {
+    max-width: 100%;
+    margin-bottom: 1rem
+}
+#todo-text {
+    margin: 0;
+    height: 60px;
+    box-sizing: border-box
+}
+
+#modal {
+    position: fixed;
+    background: rgba(0,0,0,.2);
+    width: 100%;
+    height: 100%;
+}
+.content {
+    position: absolute;
+    background: white;
+    border-radius: 20px;
+    width: 1100px;
+    height: 600px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.content h1 , .content p {
+    text-align: center;
+    text-transform: capitalize;
+    padding: 1rem 0
+}
+#edit-form {
+    max-width: 800px;
+    margin: 0 auto
+}
+
+#edit-form input[type="text"] {
+    height: 40px;
+}
+
+.flex-end {
+    justify-content: flex-end;
+}
+
+.hide {
+    display: none
+}
