@@ -64,8 +64,11 @@ function callModal(){
     // console.log(todoId, todoTitle);
     const modal = $("#modal");
     modal.find("#prev-todo").val(todoTitle); // 수정버튼 누를때 항목 타이틀을 기존 항목에 저장
-    modal.attr("class", ""); // modal 요소의 class 속성을 빈값
+    modal.fadeIn("fast") // modal 요소의 class 속성을 빈값
     modal.find("#next-todo").focus(); // 포커스 적용
+  });
+  $("#hide-modal").on("click", function(){
+    $("#modal").fadeOut("fast")
   })
 }
 
