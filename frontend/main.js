@@ -40,16 +40,18 @@ async function fetchTodos () {
     method: "get",
     success: function (rows) {
       const todoUL = $("#todos");
-      let str = ""; // 자바스크립트 변수는 초기화를 하지 않으면 undefined (상태)
+      let strArr = []; // 배열로 만들고
       rows.forEach((row, i) => {
-        str += `<li class="d-flex gap-1" data-id="${row._id}">
+        strArr.push(`<li class="d-flex gap-1" data-id="${row._id}">
             <input type="checkbox" ${row.completed ? "checked" : ""}>
             <p>${row.title}</p>
             <input type="button" value="수정" class="modify-btn">
-            <input type="button" value="삭제${i}" class="remove-btn">
-        </li>`;
+            <input type="button" value="삭제" class="remove-btn">
+        </li>`);
       });
-      todoUL.html(str);
+      strArr.reverse(); // 배열의 원소를 뒤집기(앞-뒤 바꿈)
+      strArr.join(""); // 배열의 원소를 구분자로 연결하는 메소드
+      todoUL.html(strArr);
       removeTodo();
       callModal();
     },
@@ -57,9 +59,10 @@ async function fetchTodos () {
 }
 function callModal(){
   const editTodo = $(".modify-btn");
+  let todoId; // global var
   editTodo.on("click", function(){
     const edit = $(this);
-    const todoId = edit.parent().attr("data-id"); // 수정버튼의 부모 li의 data-id 값
+    todoId = edit.parent().attr("data-id"); // 수정버튼의 부모 li의 data-id 값
     const todoTitle = edit.siblings("p").text(); // 수정버튼의 형제 p의 내용 텍스트
     // console.log(todoId, todoTitle);
     const modal = $("#modal");
@@ -67,6 +70,33 @@ function callModal(){
     modal.fadeIn("fast") // modal 요소의 class 속성을 빈값
     modal.find("#next-todo").focus(); // 포커스 적용
   });
+  $("#edit-form").on("submit", function(e){
+    e.preventDefault();
+    if($("#next-todo").val() == "") {
+      alert("변경할 내용을 입력하세요");
+      $("#next-todo").focus();
+      return;
+    }
+    // 완료 값이 체크되어 있으면, true를 전송 | 아니라면 false 전송
+    
+    $.ajax({
+      url: `http://localhost:3000/todos/${todoId}`,
+      method: 'put',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      data: JSON.stringify({
+        title: $("#next-todo").val(),
+        completed: $("#next-complete").is(":checked")
+      }),
+      success: function(){
+        alert("업데이트 되었습니다.");
+        location.reload();
+      }
+    });
+    
+
+  })
   $("#hide-modal").on("click", function(){
     $("#modal").fadeOut("fast")
   })
