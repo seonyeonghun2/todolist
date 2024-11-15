@@ -18,10 +18,25 @@
             <p>할일 항목 수정</p>
             <form id="edit-form">
                 <div>
-                    <label for="prev-todo">기존</label>
-                    <input type="text" name="prev-todo" id="prev-todo" disabled>
-                    <label for="next-todo">변경</label>
-                    <input type="text" name="next-todo" id="next-todo">
+                    <h2>할일 항목</h2>
+                    <div class="inputs d-flex gap-1">
+                        <div class="prev-input flex-2">
+                            <label for="prev-todo">기존</label>
+                            <input type="text" name="prev-todo" id="prev-todo" disabled>
+                        </div>
+                        <div class="next-input flex-2">
+                            <label for="next-todo">변경</label>
+                            <input type="text" name="next-todo" id="next-todo">
+                        </div>
+                        <div class="d-flex gap-1 flex-1">
+                            <label>
+                                미완료 <input type="radio" name="next-complete" id="prev-complete" checked>
+                            </label>
+                            <label>
+                                완료 <input type="radio" name="next-complete" id="next-complete">
+                            </label>
+                        </div>
+                    </div>
                 </div>
                 <div class="d-flex flex-end">
                     <input type="button" value="취소" id="hide-modal">
