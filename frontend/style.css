@@ -6,6 +6,12 @@
 .gap-1 {
     gap: 1rem
 }
+.flex-1 {
+    flex: 1
+}
+.flex-2 {
+    flex: 2
+}
 .items-center {
     align-items: center
 }
@@ -60,4 +66,9 @@
 
 .hide {
     display: none
+}
+
+.remove-btn:hover {
+    background: rgb(234, 62, 62);
+    color: white
 }
